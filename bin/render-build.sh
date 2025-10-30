@@ -1,9 +1,18 @@
 #!/usr/bin/env bash
 # exit on error
 set -o errexit
-bundle install
-bundle exec rake assets:precompile
-bundle exec rake assets:clean
 
-# 初回デプロイ時にDBがない場合、自動で作成＆マイグレーション
-bundle exec rake db:prepare
+echo "=== Installing gems ==="
+bundle install
+
+echo "=== Cleaning old assets ==="
+bundle exec rails assets:clean RAILS_ENV=production
+
+echo "=== Precompiling assets ==="
+bundle exec rails assets:precompile RAILS_ENV=production
+
+echo "=== Preparing database ==="
+# DBが存在しない場合は作成、既存の場合はマイグレーション
+bundle exec rails db:prepare RAILS_ENV=production
+
+echo "=== Build complete ==="
