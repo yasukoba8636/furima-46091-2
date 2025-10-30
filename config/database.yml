@@ -1,22 +1,24 @@
 default: &default
-  adapter: postgresql
-  encoding: unicode
+  encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
   <<: *default
-  database: furima_46091_2_development
-  username: postgres
+  adapter: mysql2
+  username: root
   password:
   host: localhost
+  database: furima_46091_2_development
 
 test:
   <<: *default
-  database: furima_46091_2_test
-  username: postgres
+  adapter: mysql2
+  username: root
   password:
   host: localhost
+  database: furima_46091_2_test
 
 production:
   <<: *default
+  adapter: postgresql
   url: <%= ENV['DATABASE_URL'] %>
