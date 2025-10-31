@@ -9,7 +9,7 @@ Item
  ├── belongs_to :category
  └── has_one :order
 Order
- ├── belongs_to :buyer (User)
+ ├── belongs_to :buyer  class_name: "User"
  ├── belongs_to :item
  └── has_one :shipping_address
 ShippingAddress
@@ -39,14 +39,12 @@ Items テーブル
 | name                | string     | null: false                    | 商品名                   |
 | description         | text       | null: false                    | 商品説明                  |
 | price               | integer    | null: false                    | 価格                    |
-| condition           | integer    | null: false                    | 商品の状態（enum）           |
-| shipping_payer      | integer    | null: false                    | 配送料の負担（enum）          |
-| shipping_method     | integer    | null: false                    | 配送方法（enum）            |
-| shipping_prefecture | integer    | null: false                    | 発送元の地域（enum）          |
-| shipping_days       | integer    | null: false                    | 発送までの日数（enum）         |
-| status              | integer    | default: 0                     | 出品状態（0: 出品中, 1: 売却済み） |
+| condition_id            | integer    | null: false                    | 商品の状態（enum）           |
+| shipping_method_id      | integer    | null: false                    | 配送方法（enum）            |
+| shipping_prefecture_id  | integer    | null: false                    | 発送元の地域（enum）          |
+| shipping_days_id        | integer    | null: false                    | 発送までの日数（enum）         |
 | user                | references | null: false, foreign_key: true | 出品者                   |
-| category            | references | null: false, foreign_key: true | カテゴリ                  |
+| category_id            |  integer  | null: false,  | カテゴリ                  |
 
 Association
 belongs_to :user
@@ -54,38 +52,31 @@ belongs_to :category
 has_one :order
 
 Orders テーブル
-| Column         | Type       | Options                                        | Description |
-| -------------- | ---------- | ---------------------------------------------- | ----------- |
-| buyer          | references | null: false, foreign_key: { to_table: :users } | 購入者         |
-| item           | references | null: false, foreign_key: true, unique: true   | 購入された商品     |
-| total_price    | integer    | null: false                                    | 購入時の金額      |
-| payment_status | integer    | default: 0                                     | 支払い状態（enum） |
+
+
+| Column | Type       | Options                                        | Description |
+| ------- | ---------- | ---------------------------------------------- | ----------- |
+| user    | references | null: false, foreign_key: true                 | 購入者（ユーザー） |
+| item    | references | null: false, foreign_key: true, unique: true   | 購入された商品     |
 
 Association
+- belongs_to :user
+- belongs_to :item
+- has_one :shipping_address
 
-belongs_to :buyer, class_name: "User"
-belongs_to :item
-has_one :shipping_address
 
 ShippingAddresses テーブル
 | Column       | Type       | Options                                      | Description |
 | ------------ | ---------- | -------------------------------------------- | ----------- |
 | order        | references | null: false, foreign_key: true, unique: true | 対応する購入情報    |
 | postal_code  | string     | null: false                                  | 郵便番号        |
-| prefecture   | string     | null: false                                  | 都道府県        |
+| prefecture_id   | integer     | null: false                                  | 都道府県        |
 | city         | string     | null: false                                  | 市区町村        |
-| address1     | string     | null: false                                  | 番地          |
-| address2     | string     |                                              | 建物名・部屋番号    |
+| street_address     | string     | null: false                                  | 番地          |
+| building_name    | string     |                                              | 建物名・部屋番号    |
 | phone_number | string     | null: false                                  | 電話番号        |
 
 Association
 belongs_to :order
 
-Categories テーブル
-| Column   | Type   | Options     | Description           |
-| -------- | ------ | ----------- | --------------------- |
-| name     | string | null: false | カテゴリ名                 |
-| ancestry | string |             | 親子階層（ancestry gemを使用） |
 
-Association
-has_many :items
