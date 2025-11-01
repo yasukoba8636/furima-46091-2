@@ -78,5 +78,3 @@ ShippingAddresses テーブル
 
 Association
 belongs_to :order
-
-
