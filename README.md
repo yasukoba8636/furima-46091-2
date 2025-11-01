@@ -14,14 +14,13 @@ Order
  └── has_one :shipping_address
 ShippingAddress
  └── belongs_to :order
-Category
- └── has_many :items
+
 
  Users テーブル
 | Column             | Type   | Options                   | Description   |
 | ------------------ | ------ | ------------------------- | ------------- |
 | nickname           | string | null: false               | ニックネーム        |
-| email              | string | null: false, unique: true | メールアドレス       |
+| email              | string | null: false               | メールアドレス       |
 | encrypted_password | string | null: false               | パスワード（Devise） |
 | last_name          | string | null: false               | 姓             |
 | first_name         | string | null: false               | 名             |
@@ -31,7 +30,7 @@ Category
 
 Association
 has_many :items
-has_many :orders, foreign_key: :buyer_id
+has_many :orders
 
 Items テーブル
 | Column              | Type       | Options                        | Description           |
@@ -48,7 +47,6 @@ Items テーブル
 
 Association
 belongs_to :user
-belongs_to :category
 has_one :order
 
 Orders テーブル
@@ -57,7 +55,7 @@ Orders テーブル
 | Column | Type       | Options                                        | Description |
 | ------- | ---------- | ---------------------------------------------- | ----------- |
 | user    | references | null: false, foreign_key: true                 | 購入者（ユーザー） |
-| item    | references | null: false, foreign_key: true, unique: true   | 購入された商品     |
+| item    | references | null: false, foreign_key: true                 | 購入された商品     |
 
 Association
 - belongs_to :user
@@ -68,7 +66,7 @@ Association
 ShippingAddresses テーブル
 | Column       | Type       | Options                                      | Description |
 | ------------ | ---------- | -------------------------------------------- | ----------- |
-| order        | references | null: false, foreign_key: true, unique: true | 対応する購入情報    |
+| order        | references | null: false, foreign_key: true,               | 対応する購入情報    |
 | postal_code  | string     | null: false                                  | 郵便番号        |
 | prefecture_id   | integer     | null: false                                  | 都道府県        |
 | city         | string     | null: false                                  | 市区町村        |
