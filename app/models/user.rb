@@ -14,7 +14,7 @@ class User < ApplicationRecord
   VALID_PASSWORD = /\A(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]+\z/
 
   # ===========================
-  # バリデーション
+  validates :nickname, presence: true 
   # ===========================
   validates :nickname, presence: true
   validates :last_name, presence: true, format: { with: VALID_FULL_WIDTH_NAME, message: "は全角で入力してください" }
