@@ -72,11 +72,5 @@ end
 group :production do
   gem 'pg'
 end
-# 認証
-gem 'devise'
 
-# テスト
-group :development, :test do
-  gem 'rspec-rails'
-  gem 'factory_bot_rails'
-end
+gem 'devise'

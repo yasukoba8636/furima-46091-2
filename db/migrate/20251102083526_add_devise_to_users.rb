@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
-class DeviseCreateUsers < ActiveRecord::Migration[7.1]
-  def change
-    create_table :users do |t|
+class AddDeviseToUsers < ActiveRecord::Migration[7.1]
+  def self.up
+    change_table :users do |t|
       ## Database authenticatable
-      t.string :email,              null: false, default: ""
-      t.string :encrypted_password, null: false, default: ""
+      # すでに email と encrypted_password カラムが存在するため、以下をコメントアウト
+      # t.string :email,              null: false, default: ""
+      # t.string :encrypted_password, null: false, default: ""
 
       ## Recoverable
       t.string   :reset_password_token
@@ -13,12 +14,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
 
       ## Rememberable
       t.datetime :remember_created_at
-      add_column :users, :nickname, :string, null: false
-    add_column :users, :last_name, :string, null: false
-    add_column :users, :first_name, :string, null: false
-    add_column :users, :last_name_read, :string, null: false
-    add_column :users, :first_name_read, :string, null: false
-    add_column :users, :birthday, :date, null: false
+
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false
       # t.datetime :current_sign_in_at
@@ -37,13 +33,15 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
-
-      t.timestamps null: false
+      # t.timestamps null: false
     end
 
-    add_index :users, :email,                unique: true
-    add_index :users, :reset_password_token, unique: true
-    # add_index :users, :confirmation_token,   unique: true
-    # add_index :users, :unlock_token,         unique: true
+    # すでにemailインデックスが存在する可能性があるため、安全に実行するために if_not_exists オプションを追加
+    add_index :users, :email, unique: true, if_not_exists: true
+    add_index :users, :reset_password_token, unique: true, if_not_exists: true
+  end
+
+  def self.down
+    raise ActiveRecord::IrreversibleMigration
   end
 end
