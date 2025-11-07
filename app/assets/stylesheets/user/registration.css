@@ -1,3 +1,6 @@
+@import "../shared/error_messages.css";
+
+
 .registration-main {
   width: 100%;
   min-width: 800px;
