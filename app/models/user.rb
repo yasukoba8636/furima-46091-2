@@ -18,4 +18,6 @@ class User < ApplicationRecord
   validates :birthday, presence: true
 
   validates :password, format: { with: VALID_PASSWORD, message: "は半角英数字混合で入力してください" }, allow_nil: true
+
+ has_many :items
 end

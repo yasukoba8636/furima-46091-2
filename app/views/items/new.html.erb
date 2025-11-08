@@ -1,0 +1,20 @@
+<%= form_with model: @item, local: true do |f| %>
+  <div>
+    <%= f.label :name, "商品名" %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :description, "商品説明" %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div>
+    <%= f.label :image, "商品画像" %>
+  <%= f.file_field :images, multiple: true %> <!-- ここで画像をアップロード -->
+  </div>
+
+  <div>
+    <%= f.submit "出品する" %>
+  </div>
+<% end %>
