@@ -65,6 +65,11 @@
     <%= f.label :price, "価格（¥300〜¥9,999,999）" %>
     <%= f.number_field :price, min: 300, max: 9999999, step: 1, placeholder: "半角数字で入力" %>
   </div>
+  <div>
+
+  <p>販売手数料: <span id="add-tax-price">0</span>円</p>
+  <p>販売利益: <span id="profit">0</span>円</p>
+</div>
 
   <!-- 出品ボタン -->
   <div>
