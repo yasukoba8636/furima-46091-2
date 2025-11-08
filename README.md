@@ -17,9 +17,7 @@ Order
 ShippingAddress
  └── belongs_to :order
 
-
-
- Users テーブル
+## Users テーブル
 | Column             | Type   | Options                   | Description   |
 | ------------------ | ------ | ------------------------- | ------------- |
 | nickname           | string | null: false               | ニックネーム        |
@@ -31,12 +29,11 @@ ShippingAddress
 | first_name_kana    | string | null: false               | 名（カナ）         |
 | birthday           | date   | null: false               | 生年月日          |
 
+**Association**
+- has_many :items
+- has_many :orders, foreign_key: :user_id, dependent: :destroy
 
-Association
-has_many :items
-has_many :orders, foreign_key: :user_id, dependent: :destroy
-
-Items テーブル
+## Items テーブル
 | Column                 | Type       | Options                        | Description         |
 | ---------------------- | ---------- | ------------------------------ | ------------------- |
 | name                   | string     | null: false                    | 商品名                 |
@@ -49,30 +46,27 @@ Items テーブル
 | category_id            | integer    | null: false                    | カテゴリ（ActiveHash）    |
 | user                   | references | null: false, foreign_key: true | 出品者（ユーザー）           |
 
-Association
-belongs_to :user
-has_one :order, dependent: :destroy
-belongs_to_active_hash :condition
-belongs_to_active_hash :shipping_method
-belongs_to_active_hash :shipping_prefecture
-belongs_to_active_hash :shipping_days
-belongs_to_active_hash :category
+**Association**
+- belongs_to :user
+- has_one :order, dependent: :destroy
+- belongs_to_active_hash :condition
+- belongs_to_active_hash :shipping_method
+- belongs_to_active_hash :shipping_prefecture
+- belongs_to_active_hash :shipping_days
+- belongs_to_active_hash :category
 
-Orders テーブル
-
-
+## Orders テーブル
 | Column | Type       | Options                        | Description |
 | ------ | ---------- | ------------------------------ | ----------- |
 | user   | references | null: false, foreign_key: true | 購入者（ユーザー）   |
 | item   | references | null: false, foreign_key: true | 購入された商品     |
 
-Association
+**Association**
 - belongs_to :user
 - belongs_to :item
--has_one :shipping_address, dependent: :destroy
+- has_one :shipping_address, dependent: :destroy
 
-
-ShippingAddresses テーブル
+## ShippingAddresses テーブル
 | Column         | Type       | Options                        | Description      |
 | -------------- | ---------- | ------------------------------ | ---------------- |
 | order          | references | null: false, foreign_key: true | 購入情報             |
@@ -83,7 +77,6 @@ ShippingAddresses テーブル
 | building_name  | string     |                                | 建物名・部屋番号         |
 | phone_number   | string     | null: false                    | 電話番号             |
 
-
-Association
-belongs_to :order
-belongs_to_active_hash :prefecture
+**Association**
+- belongs_to :order
+- belongs_to_active_hash :prefecture
