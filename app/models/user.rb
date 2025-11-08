@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   VALID_PASSWORD = /\A(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]+\z/
 
-
+  validates :nickname, presence: true 
   validates :last_name, presence: true, format: { with: VALID_FULL_WIDTH_NAME, message: "は全角で入力してください" }
   validates :first_name, presence: true, format: { with: VALID_FULL_WIDTH_NAME, message: "は全角で入力してください" }
   validates :last_name_kana, presence: true, format: { with: VALID_KATAKANA, message: "は全角カタカナで入力してください" }
