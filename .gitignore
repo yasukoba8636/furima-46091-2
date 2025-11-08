@@ -30,4 +30,6 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 .Ds_Store
+ユーザー管理機能
 *.Zone.Identifier
+ main
