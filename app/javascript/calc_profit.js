@@ -1,5 +1,6 @@
 function calcProfit() {
   const priceInput = document.getElementById("item-price");
+  console.log("イベント発火");
   const addTaxDom = document.getElementById("add-tax-price");
   const profitDom = document.getElementById("profit");
 
@@ -29,3 +30,7 @@ function calcProfit() {
 // Turboでページ遷移時にもイベントを再登録
 document.addEventListener("turbo:load", calcProfit);
 document.addEventListener("turbo:render", calcProfit);
+
+window.addEventListener('turbo:load', () => {
+  console.log("OK");
+});

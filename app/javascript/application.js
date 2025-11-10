@@ -2,3 +2,4 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 //= require calc_profit
+import "calc_profit"

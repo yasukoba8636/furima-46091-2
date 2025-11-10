@@ -1,78 +1,81 @@
-<h1>商品を出品する</h1>
+<div class="item-form-container">
+  <h1 class="item-form-title">商品を出品する</h1>
 
-<%= form_with model: @item, local: true, multipart: true do |f| %>
-  <% if @item.errors.any? %>
-    <div>
-      <h3><%= pluralize(@item.errors.count, "error") %> が発生しました:</h3>
-      <ul>
-        <% @item.errors.full_messages.uniq.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+  <%= form_with model: @item, local: true, multipart: true, class: "item-form" do |f| %>
+    <% if @item.errors.any? %>
+      <div class="error-messages">
+        <h3><%= pluralize(@item.errors.count, "error") %> が発生しました:</h3>
+        <ul>
+          <% @item.errors.full_messages.uniq.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <!-- 商品画像 -->
+    <div class="form-group">
+      <%= f.label :image, "商品画像" %>
+      <%= f.file_field :image, accept: "image/*" %>
+    </div>
+
+    <!-- 商品名 -->
+    <div class="form-group">
+      <%= f.label :name, "商品名" %>
+      <%= f.text_field :name %>
+    </div>
+
+    <!-- 商品の説明 -->
+    <div class="form-group">
+      <%= f.label :description, "商品の説明" %>
+      <%= f.text_area :description %>
+    </div>
+
+    <!-- カテゴリー -->
+    <div class="form-group">
+      <%= f.label :category_id, "カテゴリー" %>
+      <%= f.collection_select(:category_id, Category.all, :id, :name, { prompt: "---" }) %>
+    </div>
+
+    <!-- 商品の状態 -->
+    <div class="form-group">
+      <%= f.label :condition_id, "商品の状態" %>
+      <%= f.collection_select(:condition_id, Condition.all, :id, :name, { prompt: "---" }) %>
+    </div>
+
+    <!-- 配送料の負担 -->
+    <div class="form-group">
+      <%= f.label :shipping_fee_id, "配送料の負担" %>
+      <%= f.collection_select(:shipping_fee_id, ShippingFee.all, :id, :name, { prompt: "---" }) %>
+    </div>
+
+    <!-- 発送元の地域 -->
+    <div class="form-group">
+      <%= f.label :prefecture_id, "発送元の地域" %>
+      <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, { prompt: "---" }) %>
+    </div>
+
+    <!-- 発送までの日数 -->
+    <div class="form-group">
+      <%= f.label :shipping_day_id, "発送までの日数" %>
+      <%= f.collection_select(:shipping_day_id, ShippingDay.all, :id, :name, { prompt: "---" }) %>
+    </div>
+
+    <!-- 価格 -->
+    <div class="form-group">
+      <%= f.label :price, "価格（¥300〜¥9,999,999）" %>
+      <%= f.number_field :price, id: "item-price", min: 300, max: 9999999, step: 1, placeholder: "半角数字で入力" %>
+    </div>
+
+    <!-- 手数料・利益 -->
+    <div class="price-calc">
+      <p>販売手数料: <span id="add-tax-price">0</span>円</p>
+      <p>販売利益: <span id="profit">0</span>円</p>
+    </div>
+
+    <!-- 出品ボタン -->
+    <div class="form-actions">
+      <%= f.submit "出品する", class: "submit-btn" %>
     </div>
   <% end %>
-
-  <!-- 商品画像 -->
-  <div>
-    <%= f.label :image, "商品画像" %>
-    <%= f.file_field :image, accept: "image/*" %>
-  </div>
-
-  <!-- 商品名 -->
-  <div>
-    <%= f.label :name, "商品名" %>
-    <%= f.text_field :name %>
-  </div>
-
-  <!-- 商品の説明 -->
-  <div>
-    <%= f.label :description, "商品の説明" %>
-    <%= f.text_area :description %>
-  </div>
-
-  <!-- カテゴリー -->
-  <div>
-    <%= f.label :category_id, "カテゴリー" %>
-    <%= f.collection_select(:category_id, Category.all, :id, :name, { prompt: "---" }) %>
-  </div>
-
-  <!-- 商品の状態 -->
-  <div>
-    <%= f.label :condition_id, "商品の状態" %>
-    <%= f.collection_select(:condition_id, Condition.all, :id, :name, { prompt: "---" }) %>
-  </div>
-
-  <!-- 配送料の負担 -->
-  <div>
-    <%= f.label :shipping_fee_id, "配送料の負担" %>
-    <%= f.collection_select(:shipping_fee_id, ShippingFee.all, :id, :name, { prompt: "---" }) %>
-  </div>
-
-  <!-- 発送元の地域 -->
-  <div>
-    <%= f.label :prefecture_id, "発送元の地域" %>
-    <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, { prompt: "---" }) %>
-  </div>
-
-  <!-- 発送までの日数 -->
-  <div>
-    <%= f.label :shipping_day_id, "発送までの日数" %>
-    <%= f.collection_select(:shipping_day_id, ShippingDay.all, :id, :name, { prompt: "---" }) %>
-  </div>
-
-  <!-- 価格 -->
-  <div>
-    <%= f.label :price, "価格（¥300〜¥9,999,999）" %>
-    <%= f.number_field :price, min: 300, max: 9999999, step: 1, placeholder: "半角数字で入力" %>
-  </div>
-  <div>
-
-  <p>販売手数料: <span id="add-tax-price">0</span>円</p>
-  <p>販売利益: <span id="profit">0</span>円</p>
 </div>
-
-  <!-- 出品ボタン -->
-  <div>
-    <%= f.submit "出品する" %>
-  </div>
-<% end %>
