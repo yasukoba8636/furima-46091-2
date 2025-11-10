@@ -1,124 +1,15 @@
-/* ============================
-   メルカリ風 出品フォームデザイン
-============================ */
-
-/* ページ全体の背景 */
-body {
-  background-color: #f5f5f5;
-  font-family: "Helvetica Neue", "Arial", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
-  color: #333;
-}
-
-/* --- 出品フォーム全体 --- */
-.item-form-container {
-  max-width: 700px;
-  margin: 50px auto;
-  padding: 40px;
-  background-color: #fff;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border-top: 6px solid #ea352d;
-  /* メルカリカラーのアクセントライン */
-}
-
-/* --- タイトル --- */
-.item-form-title {
-  text-align: center;
-  font-size: 28px;
-  font-weight: bold;
-  color: #ea352d;
-  margin-bottom: 30px;
-}
-
-/* --- 入力フィールド --- */
-.form-group {
-  margin-bottom: 22px;
-}
-
-.form-group label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 6px;
-  color: #555;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 14px;
-  transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-/* フォーカス時のアニメーション */
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  border-color: #ea352d;
-  box-shadow: 0 0 4px rgba(234, 53, 45, 0.4);
-  outline: none;
-}
-
-/* --- 手数料・利益エリア --- */
-.price-calc {
-  text-align: center;
-  background-color: #fff8f8;
-  border: 1px solid #ffe0e0;
-  border-radius: 10px;
-  padding: 15px;
-  margin: 25px 0;
-  font-weight: bold;
-  color: #444;
-}
-
-.price-calc span {
-  color: #ea352d;
-  font-weight: bold;
-}
-
-/* --- 出品ボタン --- */
-.form-actions {
-  text-align: center;
-  margin-top: 30px;
-}
-
-.submit-btn {
-  background-color: #ea352d;
-  /* メルカリ赤 */
-  color: white;
-  border: none;
-  border-radius: 10px;
-  padding: 14px 50px;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-.submit-btn:hover {
-  background-color: #d12e28;
-  /* 濃い赤 */
-  transform: translateY(-2px);
-}
-
-.submit-btn:active {
-  background-color: #b82822;
-  transform: translateY(0);
-}
-
-/* --- エラーメッセージ --- */
-.error-messages {
-  background-color: #ffe0e0;
-  color: #b00000;
-  border-radius: 8px;
-  padding: 10px 15px;
-  margin-bottom: 20px;
-}
-
-.error-messages ul {
-  margin: 0;
-  padding-left: 20px;
-}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
