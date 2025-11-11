@@ -64,7 +64,7 @@
   <!-- 価格 -->
   <div>
     <%= f.label :price, "価格（¥300〜¥9,999,999）" %>
-    <%= f.number_field :price, min: 300, max: 9999999, step: 1, placeholder: "半角数字で入力" %>
+    <%= f.number_field :price, id: "item-price", min: 300, max: 9999999, step: 1, placeholder: "半角数字で入力" %>
   </div>
   <div>
 
