@@ -1,3 +1,18 @@
+.form-wrapper {
+  max-width: 600px;
+  /* フォームの最大幅 */
+  margin: 0 auto;
+  /* 左右の余白を自動で中央寄せ */
+  padding: 20px;
+  /* 余白を追加して見やすく */
+  border: 1px solid #ddd;
+  /* 任意：フォーム枠線 */
+  border-radius: 8px;
+  /* 任意：角丸 */
+  background-color: #f9f9f9;
+  /* 任意：背景色 */
+}
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
