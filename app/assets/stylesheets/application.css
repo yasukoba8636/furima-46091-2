@@ -1,14 +1,15 @@
-.form-wrapper {
-  max-width: 600px;
-  /* フォームの最大幅 */
-  margin: 0 auto;
-  /* 左右の余白を自動で中央寄せ */
-  padding: 20px;
-  /* 余白を追加して見やすく */
-  border: 1px solid #ddd;
-  /* 任意：フォーム枠線 */
-  border-radius: 8px;
-  /* 任意：角丸 */
-  background-color: #f9f9f9;
-  /* 任意：背景色 */
-}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */

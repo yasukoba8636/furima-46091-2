@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
 
   # トップページ
   def index
-    # 商品一覧を表示したい場合、ここに @items = Item.all などを後で追加
+   @items = Item.order(created_at: :desc)
   end
 
   # 出品ページ表示
@@ -12,13 +12,17 @@ class ItemsController < ApplicationController
     @item = Item.new
   end
 
+  def show
+  @item = Item.find(params[:id])
+end
+
   # 出品処理
   def create
     @item = Item.new(item_params)
     @item.user = current_user  # 出品者情報を紐づけ
 
     if @item.save
-      redirect_to root_path   # 出品完了後はトップページへ
+        redirect_to root_path, notice: "商品を出品しました"
     else
       render :new, status: :unprocessable_entity  # エラー時は出品ページに戻る
     end
