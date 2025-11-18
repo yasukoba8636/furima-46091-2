@@ -1,9 +1,20 @@
-<% if model.errors.any? %>
-<div class="error-alert">
-  <ul>
-    <% model.errors.full_messages.each do |message| %>
-    <li class='error-message'><%= message %></li>
-    <% end %>
-  </ul>
-</div>
+<%# 手動で渡された object がある場合 %>
+<% object = local_assigns[:object] if local_assigns.key?(:object) %>
+
+<%# @item がある画面なら @item を使用 %>
+<% object ||= @item if defined?(@item) %>
+
+<%# Devise の画面なら resource を使用（存在する時だけ） %>
+<% object ||= resource if defined?(resource) %>
+
+<%# object が存在し、errors を持っている場合のみ表示 %>
+<% if object && object.respond_to?(:errors) && object.errors.any? %>
+  <div class="error-alert">
+    <ul>
+      <% object.errors.full_messages.each do |message| %>
+      <li class="error-message"><%= message %></li>
+
+      <% end %>
+    </ul>
+  </div>
 <% end %>
