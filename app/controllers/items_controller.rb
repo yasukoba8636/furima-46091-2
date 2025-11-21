@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
 
   # トップページ
   def index
-   #@items = Item.order(created_at: :desc)
+     @items = Item.order(created_at: :desc)
   end
 
   # 出品ページ表示
@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-#@item = Item.find(params[:id])
+  @item = Item.find(params[:id])
 end
 
   # 出品処理
