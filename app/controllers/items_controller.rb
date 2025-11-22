@@ -33,7 +33,7 @@ end
   # Strong Parameters（許可するカラムを明示）
   def item_params
     params.require(:item).permit(
-      :name, :description, :category_id, :condition_id, :shipping_fee_id,
+      :name, :info, :description, :category_id, :condition_id, :shipping_fee_id,
       :prefecture_id, :shipping_day_id, :price, :image
     )
   end
