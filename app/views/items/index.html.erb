@@ -108,7 +108,7 @@
       <% if @items.any? %>
         <% @items.each do |item| %>
           <li class='list'>
-            <%= link_to item_path(item) do %>
+            <%= link_to "#"  do %>
 
               <div class='item-img-content'>
                 <%# 画像が無い商品でも見本と同じダミーを表示 %>
@@ -118,7 +118,7 @@
               <div class='item-info'>
                 <h3 class='item-name'><%= item.name %></h3>
                 <div class='item-price'>
-                  <span>¥<%= item.price %><br>配送料負担</span>
+                  <span>¥<%= item.price %><br><%= item.shipping_fee.name %></span>
                 </div>
               </div>
 
