@@ -1,6 +1,8 @@
 class ItemsController < ApplicationController
   # ログインしていないユーザーは出品ページへ行けないようにする
   before_action :authenticate_user!, only: [:new, :create]
+  before_action :set_item, only: [:show]
+
 
   # トップページ
   def index
@@ -12,9 +14,12 @@ class ItemsController < ApplicationController
     @item = Item.new
   end
 
-  def show
-#@item = Item.find(params[:id])
-end
+  def show  
+  end
+
+  #def move_to_index
+    #redirect_to root_path unless current_user.id == @item.user_id
+  #end
 
   # 出品処理
   def create
@@ -30,12 +35,16 @@ end
 
   private
 
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
   # Strong Parameters（許可するカラムを明示）
   def item_params
     params.require(:item).permit(
-      :name, :info, :description, :category_id, :condition_id, :shipping_fee_id,
-      :prefecture_id, :shipping_day_id, :price, :image
+    :name, :description, :category_id, :condition_id, :shipping_fee_id,
+    :prefecture_id,:shipping_day_id, :price, :image 
     )
+    end
   end
-end
 

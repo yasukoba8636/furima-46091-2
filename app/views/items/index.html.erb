@@ -104,28 +104,24 @@
     <div class='subtitle'>新規投稿商品</div>
 
     <ul class='item-lists'>
-
-      <% if @items.any? %>
+      <% if @items.present? %>
         <% @items.each do |item| %>
-          <li class='list'>
-            <%= link_to "#"  do %>
-
-              <div class='item-img-content'>
-                <%# 画像が無い商品でも見本と同じダミーを表示 %>
-                <%= image_tag (item.image.attached? ? item.image : "item-sample.png"), class: "item-img" %>
-              </div>
-
+          <li class="item-card">
+            <%= link_to item_path(item) do %>
+              <%# 商品画像 %>
+              <%= image_tag(item.image.attached? ? item.image : "item-sample.png", class: "item-image") %>
               <div class='item-info'>
-                <h3 class='item-name'><%= item.name %></h3>
+                <h3 class='item-name'><%= item.name %></h3> 
                 <div class='item-price'>
-                  <span>¥<%= item.price %><br><%= item.shipping_fee.name %></span>
+                 ¥<%= item.price %><br>
+                  <%= item.shipping_fee.name %> 
                 </div>
-              </div>
-
+              </div>  
             <% end %>
           </li>
-        <% end %>
-
+          <%end%>
+        
+          
       <% else %>
         <%# ========================= %>
         <%# 商品が無い時のダミー        %>
