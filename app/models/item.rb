@@ -12,19 +12,19 @@ class Item < ApplicationRecord
   belongs_to_active_hash :shipping_day
 
   # 売却済み判定
-  def sold?
-    order.present?
-  end
+  #def sold?
+    #order.present?
+  #end
 
   # 出品者本人か判定
-  def seller?(current_user)
-    current_user && user == current_user
-  end
+  #def seller?(current_user)
+    #current_user && user == current_user
+  #end
 
   # 販売中判定（売却済みでなければ販売中）
-  def on_sale?
-    !sold?
-  end
+  #def on_sale?
+    #!sold?
+  #end
 
   # バリデーション
   validates :image, :name, :description, :category_id, :condition_id, :shipping_fee_id,

@@ -17,9 +17,9 @@ class ItemsController < ApplicationController
   def show  
   end
 
-  def move_to_index
-    redirect_to root_path unless current_user.id == @item.user_id
-  end
+  #def move_to_index
+    #redirect_to root_path unless current_user.id == @item.user_id
+  #end
 
   # 出品処理
   def create

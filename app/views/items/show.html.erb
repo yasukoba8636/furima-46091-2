@@ -11,14 +11,10 @@
     <%= image_tag @item.image, class: "item-box-img" %>
     <% else %>
     <%= image_tag "no_image.png", class: "item-box-img" %>
-<% end %>
+  <% end %>
 
 
-      <% if @item.order.present? %>
-        <div class="sold-out">
-          <span>Sold Out!!</span>
-        </div>
-      <% end %>
+    
     </div>
 
     <div class="item-price-box">
@@ -31,26 +27,15 @@
     </div>
 
 
-    <%# ========================================= %>
-    <%# 出品者とログインユーザーが同じ場合     %>
-    <%# ========================================= %>
-    <% if user_signed_in? && current_user.id == @item.user_id %>
-
-      <% if @item.order.blank? %>
+    <% if user_signed_in? && @item.order.blank? %>
+      <% if current_user.id == @item.user_id %>
+    
         <%= link_to "商品の編集", "#", class: "item-red-btn" %>
         <p class="or-text">or</p>
         <%= link_to "削除", "#", data: { turbo_method: :delete }, class: "item-destroy" %>
+      <% else %>    
+      <%= link_to "購入画面に進む", "#", class: "item-red-btn" %>
       <% end %>
-
-    <% else %>
-
-      <%# ========================= %>
-      <%# 出品者以外（購入者側）   %>
-      <%# ========================= %>
-     <% if user_signed_in? && @item.order.blank? %>
-        <%= link_to "購入画面に進む", "#", class: "item-red-btn" %>
-      <% end %>
-
     <% end %>
 
 
@@ -122,9 +107,9 @@
       後ろの商品 ＞
     </a>
   </div>
-  <%# 詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
+  
   <a href="#" class="another-item"><%= @item.category.name %>をもっと見る</a>
-  <%# //詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
+
 </div>
 
 <%= render "shared/footer" %>
