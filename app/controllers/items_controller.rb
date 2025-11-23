@@ -1,8 +1,9 @@
 class ItemsController < ApplicationController
   # ログインしていないユーザーは出品ページへ行けないようにする
-  before_action :authenticate_user!, only: [:new, :create]
-  before_action :set_item, only: [:show]
-
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :update]
+  before_action :move_to_index, only: [:edit, :update]
+  before_action :sold_out_item, only: [:edit]
 
   # トップページ
   def index
@@ -17,9 +18,21 @@ class ItemsController < ApplicationController
   def show  
   end
 
-  #def move_to_index
-    #redirect_to root_path unless current_user.id == @item.user_id
-  #end
+  def edit
+  end
+
+  def update
+  if @item.update(item_params)
+    redirect_to item_path(@item), notice: "商品情報を更新しました"
+  else
+    render :edit, status: :unprocessable_entity
+  end
+end
+
+
+  def move_to_index
+    redirect_to root_path unless current_user.id == @item.user_id
+  end
 
   # 出品処理
   def create
@@ -31,6 +44,10 @@ class ItemsController < ApplicationController
     else
       render :new, status: :unprocessable_entity  # エラー時は出品ページに戻る
     end
+  end
+
+  def sold_out_item
+  redirect_to root_path if @item.order.present?
   end
 
   private
