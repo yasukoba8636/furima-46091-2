@@ -14,12 +14,7 @@ class ItemsController < ApplicationController
     @item = Item.new
   end
 
-  def show
-    @item = Item.find(params[:id])
-  end
-
-  def set_item
-    @item = Item.find(params[:id])
+  def show  
   end
 
   def move_to_index
@@ -39,6 +34,10 @@ class ItemsController < ApplicationController
   end
 
   private
+
+  def set_item
+    @item = Item.find(params[:id])
+  end
 
   # Strong Parameters（許可するカラムを明示）
   def item_params
