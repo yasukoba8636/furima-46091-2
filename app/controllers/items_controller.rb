@@ -48,7 +48,6 @@ end
   end
 
   def destroy
-  @item = Item.find(params[:id])
 
   if current_user.id == @item.user_id
     @item.destroy
