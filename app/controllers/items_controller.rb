@@ -48,10 +48,16 @@ end
   end
 
   def destroy
-  @item.destroy
-  redirect_to root_path
+  @item = Item.find(params[:id])
+
+  if current_user.id == @item.user_id
+    @item.destroy
+    redirect_to root_path, notice: "商品を削除しました"
+  else
+    redirect_to root_path, alert: "削除権限がありません"
   end
-  
+end
+
   def sold_out_item
   redirect_to root_path if @item.order.present?
   end
