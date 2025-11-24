@@ -1,0 +1,122 @@
+<%= render "shared/header" %>
+
+<div class="items-sell-contents">
+  <header class="items-sell-header">
+    <%= link_to image_tag('furima-logo-color.png', size: '185x50'), "/" %>
+  </header>
+
+  <div class="items-sell-main">
+    <h2 class="items-sell-title">商品の情報を編集</h2>
+
+    <%= render 'shared/error_messages', model: @item %>
+
+    <%= form_with model: @item, local: true do |f| %>
+
+      <!-- 商品画像 -->
+      <div class="img-upload">
+        <div class="weight-bold-text">
+          商品画像
+          <span class="indispensable">必須</span>
+        </div>
+        <div class="click-upload">
+          <p>クリックしてファイルをアップロード</p>
+          <%= f.file_field :image, id:"item-image" %>
+
+          <% if @item.image.attached? %>
+            <p>現在の画像：</p>
+            <%= image_tag @item.image, class: "preview-img" %>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- 商品名 -->
+      <div class="new-items">
+        <div class="weight-bold-text">
+          商品名
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.text_field :name, class:"items-text", placeholder:"商品名（必須40文字まで）" %>
+
+        <div class="items-explain">
+          <div class="weight-bold-text">
+            商品の説明
+            <span class="indispensable">必須</span>
+          </div>
+          <%= f.text_area :description, class:"items-text", rows:"7", placeholder:"商品の説明（必須1,000文字まで）" %>
+        </div>
+      </div>
+
+      <!-- 商品の詳細 -->
+      <div class="items-detail">
+        <div class="weight-bold-text">商品の詳細</div>
+
+        <div class="form">
+          <div class="weight-bold-text">
+            カテゴリー
+            <span class="indispensable">必須</span>
+          </div>
+          <%= f.collection_select :category_id, Category.all, :id, :name,
+                { include_blank: "選択してください" },
+                { class:"select-box" } %>
+
+          <div class="weight-bold-text">
+            商品の状態
+            <span class="indispensable">必須</span>
+          </div>
+          <%= f.collection_select :condition_id, Condition.all, :id, :name,
+                { include_blank: "選択してください" },
+                { class:"select-box" } %>
+        </div>
+      </div>
+
+      <!-- 配送 -->
+      <div class="items-detail">
+        <div class="weight-bold-text">配送について</div>
+        <div class="form">
+          <div class="weight-bold-text">
+            配送料の負担
+            <span class="indispensable">必須</span>
+          </div>
+          <%= f.collection_select :shipping_fee_id, ShippingFee.all, :id, :name,
+                { include_blank: "選択してください" },
+                { class:"select-box" } %>
+
+          <div class="weight-bold-text">
+            発送元の地域
+            <span class="indispensable">必須</span>
+          </div>
+          <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name,
+                { include_blank: "選択してください" },
+                { class:"select-box" } %>
+
+          <div class="weight-bold-text">
+            発送までの日数
+            <span class="indispensable">必須</span>
+          </div>
+          <%= f.collection_select :shipping_day_id, ShippingDay.all, :id, :name,
+                { include_blank: "選択してください" },
+                { class:"select-box" } %>
+        </div>
+      </div>
+
+      <!-- 金額 -->
+      <div class="sell-price">
+        <div class="price-content">
+          <span class="weight-bold-text">価格</span>
+          <%= f.number_field :price, class:"price-input", placeholder:"例）300" %>
+        </div>
+      </div>
+
+      <!-- ボタン -->
+      <div class="sell-btn-contents">
+        <%= f.submit "変更する", class:"sell-btn" %>
+        <%= link_to "もどる", item_path(@item), class:"back-btn" %>
+      </div>
+
+    <% end %>
+  </div>
+
+  <footer class="items-sell-footer">
+    <%= link_to image_tag('furima-logo-color.png', size: '185x50'), "/" %>
+  </footer>
+</div>
