@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
   # ログインしていないユーザーは出品ページへ行けないようにする
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-  before_action :set_item, only: [:show, :edit, :update]
-  before_action :move_to_index, only: [:edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :move_to_index_unless_seller, only: [:edit, :update]
   before_action :sold_out_item, only: [:edit]
 
   # トップページ
@@ -47,6 +47,11 @@ end
     end
   end
 
+  def destroy
+  @item.destroy
+  redirect_to root_path
+  end
+  
   def sold_out_item
   redirect_to root_path if @item.order.present?
   end
