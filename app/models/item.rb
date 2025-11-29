@@ -12,7 +12,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :shipping_day
 
   # 売却済み判定
-  def sold?
+  def sold_out?
     order.present?
   end
 
